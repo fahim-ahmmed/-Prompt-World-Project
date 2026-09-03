@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast"; // Toast ইম্পোর্ট করা হলো
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,7 +20,6 @@ export default function LoginPage() {
       const backendUrl =
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-      // Fix trailing slashes in environment variable URL
       const cleanUrl = backendUrl.replace(/\/$/, "");
 
       const res = await fetch(`${cleanUrl}/api/auth/login`, {
@@ -30,7 +28,6 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      // Safely verify content type before calling res.json()
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         throw new Error(
@@ -44,27 +41,23 @@ export default function LoginPage() {
         throw new Error(data.message || "Invalid email or password!");
       }
 
-      // LocalStorage-এ টোকেন ও ইউজার ডেটা সেভ করা
+      // LocalStorage-এ সেভ করা
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // 🚀 Toast মেসেজ দেখানো
-      toast.success(data.message || "🎉 Logged in successfully!");
+      // Navbar-কে সাথে সাথে জানানোর জন্য Event
+      window.dispatchEvent(new Event("authChange"));
 
-      // 🚀 Home Page (/) এ রিডাইরেক্ট করা
-      setTimeout(() => {
-        router.push("/");
-        router.refresh();
-      }, 1000);
+      // রিডাইরেক্ট ও রিফ্রেশ
+      router.push("/");
+      router.refresh();
     } catch (err) {
       let errorMessage = err.message;
       if (err.name === "TypeError" && err.message === "Failed to fetch") {
         errorMessage =
           "Cannot connect to server! Ensure backend is deployed and running.";
       }
-
       setError(errorMessage);
-      toast.error(errorMessage); // 🚀 এরর Toast দেখানো
     } finally {
       setLoading(false);
     }
