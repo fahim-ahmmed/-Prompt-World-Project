@@ -11,15 +11,16 @@ export default function Navbar() {
   const myImageLink =
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80";
 
+  // ১. প্রাথমিক অবস্থায় user নিশ্চিতভাবে null থাকবে (বাই-ডিফল্ট Logged Out)
   const [user, setUser] = useState(null);
-  const [mounted, setMounted] = useState(false); // Hydration mismatch প্রতিরোধ করার জন্য
+  const [mounted, setMounted] = useState(false);
 
   // Local Storage থেকে ইউজার ডেটা চেক করার ফাংশন
   const checkAuth = () => {
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    if (storedUser && token && storedUser !== "undefined") {
+    if (token && storedUser && storedUser !== "undefined") {
       try {
         const parsed = JSON.parse(storedUser);
         setUser({
@@ -36,7 +37,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    setMounted(true); // ক্লায়েন্ট সাইড লোড সম্পন্ন নির্দেশ করে
+    setMounted(true); // ক্লায়েন্ট সাইড লোড সম্পন্ন নির্দেশ করবে
     checkAuth();
 
     // Custom Auth Event এবং Storage Event শুনবে
@@ -112,7 +113,7 @@ export default function Navbar() {
         {/* USER PROFILE & LOGOUT / LOGIN */}
         <div className="flex items-center gap-3 min-h-[40px]">
           {!mounted ? (
-            // লোড হওয়ার সময় স্কেলিটন বা ফাঁকা জায়গা রাখবে যাতে ফ্লিকার না করে
+            // লোড হওয়ার সময় স্কেলিটন বা ফাঁকা জায়গা রাখবে যাতে ফ্লিকার না করে
             <div className="h-9 w-24 rounded-xl bg-white/5 animate-pulse" />
           ) : user ? (
             <div className="flex items-center gap-3">
