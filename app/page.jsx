@@ -123,7 +123,7 @@ export default function HomePage() {
             alt="Hero BG"
             className="h-full w-full object-cover opacity-20 filter blur-sm scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#07090e]/90 via-[#07090e]/80 to-[#07090e]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#07090e] via-[#07090e]/80 to-[#07090e]" />
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-96 w-96 rounded-full bg-violet/30 blur-[120px]" />
           <div className="absolute top-1/3 right-1/4 h-80 w-80 rounded-full bg-amber/20 blur-[100px]" />
         </div>

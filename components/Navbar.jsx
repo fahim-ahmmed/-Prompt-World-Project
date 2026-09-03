@@ -8,17 +8,17 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   
-  // আপনার ডাইরেক্ট ইমেজ লিংক
-const myImageLink = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80";
-  const [user, setUser] = useState({
-    name: "Shihab Ahmmed",
-    email: "shihab@example.com",
-    photoURL: myImageLink,
-  });
+  const myImageLink = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80";
+  
+  // ১. প্রাথমিক অবস্থায় user স্টেট null থাকবে (যাতে শুরুতেইLogged In না দেখায়)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // ২. শুধুমাত্র Local Storage-এ ইউজার তথ্য থাকলেই কেবল স্টেট আপডেট হবে
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    const token = localStorage.getItem("token");
+
+    if (storedUser && token) {
       try {
         const parsed = JSON.parse(storedUser);
         setUser({
@@ -27,9 +27,12 @@ const myImageLink = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2
         });
       } catch (err) {
         console.error("Failed to parse user data", err);
+        setUser(null);
       }
+    } else {
+      setUser(null);
     }
-  }, []);
+  }, [pathname]); // রাউট পরিবর্তনের সাথে সাথে চেক আপডেট হবে
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -39,11 +42,12 @@ const myImageLink = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2
     router.refresh();
   };
 
+  // ৩. লগইন থাকা বা না থাকার ওপর ভিত্তি করে ডাইনামিক নেভিগেশন লিংক
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "All Prompts", href: "/all-prompts" },
     { name: "Categories", href: "/categories" },
-    { name: "Dashboard", href: "/dashboard" },
+    ...(user ? [{ name: "Dashboard", href: "/dashboard" }] : []),
   ];
 
   return (
@@ -110,9 +114,6 @@ const myImageLink = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2
                 onClick={handleLogout}
                 className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl border border-red-500/20 bg-red-500/10 px-4.5 py-2 text-xs font-bold text-red-400 backdrop-blur-md shadow-lg shadow-red-500/5 hover:border-red-500/50 hover:bg-red-500 hover:text-white active:scale-95 transition-all duration-300"
               >
-                <span className="text-sm group-hover:rotate-12 transition-transform duration-300">
-                  
-                </span>
                 <span>Log Out</span>
               </button>
             </div>
