@@ -20,11 +20,22 @@ export default function LoginPage() {
       const backendUrl =
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-      const res = await fetch(`${backendUrl}/api/auth/login`, {
+      // Fix trailing slashes in environment variable URL
+      const cleanUrl = backendUrl.replace(/\/$/, "");
+
+      const res = await fetch(`${cleanUrl}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
+      // Fixed: Safely verify content type before calling res.json() to prevent HTML DOCTYPE JSON errors
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error(
+          "Server returned an invalid response (HTML Error Page). Please check your backend URL and MongoDB connection."
+        );
+      }
 
       const data = await res.json();
 
@@ -42,7 +53,7 @@ export default function LoginPage() {
     } catch (err) {
       if (err.name === "TypeError" && err.message === "Failed to fetch") {
         setError(
-          "Cannot connect to server! Ensure backend is running on http://localhost:5000"
+          "Cannot connect to server! Ensure backend is deployed and running."
         );
       } else {
         setError(err.message);
