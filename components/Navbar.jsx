@@ -11,20 +11,19 @@ export default function Navbar() {
   const myImageLink =
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80";
 
-  // ১. প্রাথমিক অবস্থায় বাই-ডিফল্ট null থাকবে (Logged Out)
+  // Initial state: Logged Out
   const [user, setUser] = useState(null);
   const [mounted, setMounted] = useState(false);
 
-  // Local Storage থেকে ইউজার ডেটা চেক করার ফাংশন
+  // Local Storage থেকে ইউজার ডেটা চেক
   const checkAuth = () => {
-    if (typeof window === "undefined") return;
-
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
-    if (token && storedUser && storedUser !== "undefined") {
+    if (storedUser && token && storedUser !== "undefined") {
       try {
         const parsed = JSON.parse(storedUser);
+
         setUser({
           ...parsed,
           photoURL: parsed.photoURL || myImageLink,
@@ -39,26 +38,36 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    // মাউন্ট হওয়ার সাথে সাথে অথ স্টেট রিড করবে
-    checkAuth();
-    setMounted(true);
+    // প্রথমে অবশ্যই Logged Out state থাকবে
+    setUser(null);
+    setMounted(false);
 
-    // Custom Event ও Storage পরিবর্তন হ্যান্ডেল করবে
-    const handleAuthChange = () => checkAuth();
-    window.addEventListener("authChange", handleAuthChange);
-    window.addEventListener("storage", handleAuthChange);
+    // Client-side load হওয়ার পর authentication check করবে
+    const timer = setTimeout(() => {
+      setMounted(true);
+      checkAuth();
+    }, 0);
+
+    // Custom Auth Event এবং Storage Event শুনবে
+    window.addEventListener("authChange", checkAuth);
+    window.addEventListener("storage", checkAuth);
 
     return () => {
-      window.removeEventListener("authChange", handleAuthChange);
-      window.removeEventListener("storage", handleAuthChange);
+      clearTimeout(timer);
+
+      window.removeEventListener("authChange", checkAuth);
+      window.removeEventListener("storage", checkAuth);
     };
   }, [pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+
     setUser(null);
+
     window.dispatchEvent(new Event("authChange"));
+
     router.push("/login");
     router.refresh();
   };
@@ -73,6 +82,7 @@ export default function Navbar() {
   return (
     <header className="border-b border-white/10 bg-[#07090e]/90 backdrop-blur-md sticky top-0 z-50 font-sans text-paper">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-[18px] bg-gradient-to-tr from-violet via-purple-500/50 to-amber-300/80 p-[1.5px] shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-transform duration-300 group-hover:scale-105">
@@ -85,6 +95,7 @@ export default function Navbar() {
 
           <span className="font-display text-xl font-bold tracking-tight flex items-center">
             <span className="text-white font-extrabold">Prompt</span>
+
             <span className="bg-gradient-to-r from-[#b392ff] via-[#dcae78] to-transparent bg-clip-text text-transparent opacity-80 pl-0.5">
               World
             </span>
@@ -95,6 +106,7 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-7 text-sm font-bold">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
+
             return (
               <Link
                 key={link.href}
@@ -106,6 +118,7 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
+
                 {isActive && (
                   <span className="absolute left-0 bottom-0 h-[2.5px] w-full rounded-full bg-violet shadow-sm shadow-violet" />
                 )}
@@ -117,9 +130,11 @@ export default function Navbar() {
         {/* USER PROFILE & LOGOUT / LOGIN */}
         <div className="flex items-center gap-3 min-h-[40px]">
           {!mounted ? (
+            // Initial loading state
             <div className="h-9 w-24 rounded-xl bg-white/5 animate-pulse" />
           ) : user ? (
             <div className="flex items-center gap-3">
+
               {/* User Profile Info */}
               <div className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur-md shadow-inner">
                 <img
@@ -127,6 +142,7 @@ export default function Navbar() {
                   alt={user.name || "User"}
                   className="h-8 w-8 rounded-xl object-cover border border-violet/50 shadow-md"
                 />
+
                 <span className="text-sm font-bold text-white max-w-[130px] truncate">
                   {user.name || "User"}
                 </span>
@@ -148,6 +164,7 @@ export default function Navbar() {
               >
                 Log In
               </Link>
+
               <Link
                 href="/register"
                 className="rounded-xl bg-violet px-5 py-2 text-sm font-bold text-white shadow-lg shadow-violet/25 hover:bg-violet/90 transition-all"
