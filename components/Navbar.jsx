@@ -11,12 +11,14 @@ export default function Navbar() {
   const myImageLink =
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80";
 
-  // ১. প্রাথমিক অবস্থায় user নিশ্চিতভাবে null থাকবে (বাই-ডিফল্ট Logged Out)
+  // ১. প্রাথমিক অবস্থায় বাই-ডিফল্ট null থাকবে (Logged Out)
   const [user, setUser] = useState(null);
   const [mounted, setMounted] = useState(false);
 
   // Local Storage থেকে ইউজার ডেটা চেক করার ফাংশন
   const checkAuth = () => {
+    if (typeof window === "undefined") return;
+
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
@@ -37,16 +39,18 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    setMounted(true); // ক্লায়েন্ট সাইড লোড সম্পন্ন নির্দেশ করবে
+    // মাউন্ট হওয়ার সাথে সাথে অথ স্টেট রিড করবে
     checkAuth();
+    setMounted(true);
 
-    // Custom Auth Event এবং Storage Event শুনবে
-    window.addEventListener("authChange", checkAuth);
-    window.addEventListener("storage", checkAuth);
+    // Custom Event ও Storage পরিবর্তন হ্যান্ডেল করবে
+    const handleAuthChange = () => checkAuth();
+    window.addEventListener("authChange", handleAuthChange);
+    window.addEventListener("storage", handleAuthChange);
 
     return () => {
-      window.removeEventListener("authChange", checkAuth);
-      window.removeEventListener("storage", checkAuth);
+      window.removeEventListener("authChange", handleAuthChange);
+      window.removeEventListener("storage", handleAuthChange);
     };
   }, [pathname]);
 
@@ -54,7 +58,7 @@ export default function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    window.dispatchEvent(new Event("authChange")); // পুরো অ্যাপকে অবগত করা
+    window.dispatchEvent(new Event("authChange"));
     router.push("/login");
     router.refresh();
   };
@@ -113,7 +117,6 @@ export default function Navbar() {
         {/* USER PROFILE & LOGOUT / LOGIN */}
         <div className="flex items-center gap-3 min-h-[40px]">
           {!mounted ? (
-            // লোড হওয়ার সময় স্কেলিটন বা ফাঁকা জায়গা রাখবে যাতে ফ্লিকার না করে
             <div className="h-9 w-24 rounded-xl bg-white/5 animate-pulse" />
           ) : user ? (
             <div className="flex items-center gap-3">
