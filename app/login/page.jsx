@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast"; // Toast ইম্পোর্ট করা হলো
 
 export default function LoginPage() {
   const router = useRouter();
@@ -29,11 +30,11 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      // Fixed: Safely verify content type before calling res.json() to prevent HTML DOCTYPE JSON errors
+      // Safely verify content type before calling res.json()
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         throw new Error(
-          "Server returned an invalid response (HTML Error Page). Please check your backend URL and MongoDB connection."
+          "Server returned an invalid response. Please check backend connection."
         );
       }
 
@@ -47,17 +48,23 @@ export default function LoginPage() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      alert("🎉 Logged in successfully!");
-      router.push("/dashboard");
-      router.refresh();
+      // 🚀 Toast মেসেজ দেখানো
+      toast.success(data.message || "🎉 Logged in successfully!");
+
+      // 🚀 Home Page (/) এ রিডাইরেক্ট করা
+      setTimeout(() => {
+        router.push("/");
+        router.refresh();
+      }, 1000);
     } catch (err) {
+      let errorMessage = err.message;
       if (err.name === "TypeError" && err.message === "Failed to fetch") {
-        setError(
-          "Cannot connect to server! Ensure backend is deployed and running."
-        );
-      } else {
-        setError(err.message);
+        errorMessage =
+          "Cannot connect to server! Ensure backend is deployed and running.";
       }
+
+      setError(errorMessage);
+      toast.error(errorMessage); // 🚀 এরর Toast দেখানো
     } finally {
       setLoading(false);
     }
