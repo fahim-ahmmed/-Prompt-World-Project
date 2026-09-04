@@ -21,8 +21,10 @@ export default function HomePage() {
       copies: 1240,
       rating: "4.9",
       author: "Shihab Ahmmed",
-      authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
+      authorAvatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
       code: "You are a senior SQL engineer. Given this query and its error message, explain the root cause in one sentence, then return a corrected query with nothing else changed.\n\nQuery: {{query}}\nError: {{error}}",
     },
     {
@@ -35,7 +37,8 @@ export default function HomePage() {
       rating: "5.0",
       author: "Alex Rivers",
       authorAvatar: "https://avatar.iran.liara.run/public/3",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80",
       code: "Act as a Principal Full-Stack Engineer. Generate an optimal folder structure for Next.js 15 App Router using Server Actions, Better Auth, and Tailwind CSS. Ensure strict TypeScript types.",
     },
     {
@@ -48,7 +51,8 @@ export default function HomePage() {
       rating: "4.8",
       author: "Elena Rostova",
       authorAvatar: "https://avatar.iran.liara.run/public/4",
-      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80",
       code: "A cinematic hyper-realistic photo of a developer in a dark neon-lit studio, holographic screens, shot on 85mm lens, f/1.8, RAW photo --v 6.0 --ar 16:9",
     },
     {
@@ -61,7 +65,8 @@ export default function HomePage() {
       rating: "4.7",
       author: "Devin Miller",
       authorAvatar: "https://avatar.iran.liara.run/public/6",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80",
       code: "You are an elite conversion copywriter. Write a headline, subheadline, and 3 high-converting bullet points for an AI SaaS product targeting startup CTOs.",
     },
   ]);
@@ -70,7 +75,7 @@ export default function HomePage() {
     const matchesSearch =
       prompt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       prompt.code.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     const matchesEngine =
       selectedEngine === "all" ||
       prompt.engine.toLowerCase().includes(selectedEngine.toLowerCase());
@@ -98,24 +103,22 @@ export default function HomePage() {
   const faqs = [
     {
       q: "How do PromptWorld prompts work?",
-      a: "Our prompts are crafted and manually tested across multiple AI models (GPT-4o, Claude 3.5, Midjourney) to ensure production-quality output. Simply copy and paste them into your workspace using dynamic variable placeholders."
+      a: "Our prompts are crafted and manually tested across multiple AI models (GPT-4o, Claude 3.5, Midjourney) to ensure production-quality output. Simply copy and paste them into your workspace using dynamic variable placeholders.",
     },
     {
       q: "Can I submit my own engineered prompts?",
-      a: "Yes! You can publish your engineered prompts to the public marketplace or keep them saved privately inside your dashboard."
+      a: "Yes! You can publish your engineered prompts to the public marketplace or keep them saved privately inside your dashboard.",
     },
     {
       q: "Is account creation required to copy prompts?",
-      a: "Free prompts can be copied instantly with a single click. Creating a free account unlocks personalized dashboard features, favorite saving, and submission tools."
+      a: "Free prompts can be copied instantly with a single click. Creating a free account unlocks personalized dashboard features, favorite saving, and submission tools.",
     },
   ];
 
   return (
     <div className="min-h-screen bg-[#07090e] font-sans text-paper space-y-20 pb-20">
-      
       {/* 1. HERO SECTION WITH FUTURISTIC GLOW & BACKGROUND PATTERN */}
       <section className="relative overflow-hidden border-b border-white/10 px-4 pt-20 pb-16 md:px-6 md:pt-28 md:pb-24">
-        
         {/* Glowing Background Image & Grid Overlay */}
         <div className="absolute inset-0 pointer-events-none">
           <img
@@ -130,7 +133,6 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-            
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full border border-violet/40 bg-violet/15 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-violet shadow-lg shadow-violet/20">
                 <span className="h-2 w-2 rounded-full bg-violet animate-pulse" />
@@ -138,11 +140,14 @@ export default function HomePage() {
               </div>
 
               <h1 className="mt-6 font-display text-4xl font-black tracking-tight text-white md:text-6xl md:leading-[1.12]">
-                The prompt you <br /> need has <span className="text-violet">arrived.</span>
+                The prompt you <br /> need has{" "}
+                <span className="text-violet">arrived.</span>
               </h1>
 
               <p className="mt-6 max-w-xl text-xs leading-relaxed text-mist md:text-sm">
-                PromptWorld is the marketplace for high-performing AI prompts. Tested and rated for ChatGPT, Gemini, Claude, and Midjourney. Search, copy, and get results instantly.
+                PromptWorld is the marketplace for high-performing AI prompts.
+                Tested and rated for ChatGPT, Gemini, Claude, and Midjourney.
+                Search, copy, and get results instantly.
               </p>
 
               {/* Search Bar */}
@@ -164,8 +169,16 @@ export default function HomePage() {
 
               {/* Trending Tags */}
               <div className="mt-6 flex flex-wrap items-center gap-2 text-xs">
-                <span className="text-[11px] font-medium text-mist">Trending:</span>
-                {["SQL", "Next.js", "Midjourney", "Copywriting", "Unit Tests"].map((tag, idx) => (
+                <span className="text-[11px] font-medium text-mist">
+                  Trending:
+                </span>
+                {[
+                  "SQL",
+                  "Next.js",
+                  "Midjourney",
+                  "Copywriting",
+                  "Unit Tests",
+                ].map((tag, idx) => (
                   <button
                     key={idx}
                     onClick={() => setSearchQuery(tag)}
@@ -185,7 +198,9 @@ export default function HomePage() {
                     <span className="h-3 w-3 rounded-full bg-red-500/80" />
                     <span className="h-3 w-3 rounded-full bg-amber/80" />
                     <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
-                    <span className="ml-2 font-mono text-xs font-semibold text-mist">sql-debugging.prompt</span>
+                    <span className="ml-2 font-mono text-xs font-semibold text-mist">
+                      sql-debugging.prompt
+                    </span>
                   </div>
                   <span className="rounded-full border border-violet/30 bg-violet/10 px-3 py-0.5 text-[10px] font-bold text-violet">
                     Claude 3.5
@@ -193,9 +208,17 @@ export default function HomePage() {
                 </div>
 
                 <div className="my-6 rounded-2xl border border-white/5 bg-[#06080e] p-4 font-mono text-xs leading-relaxed text-emerald-400">
-                  <p className="text-mist">You are a senior SQL engineer. Given this query and its error message, explain the root cause in one sentence, then return a corrected query with nothing else changed.</p>
-                  <p className="mt-3 text-white"><span className="text-violet">Query:</span> {"{{query}}"}</p>
-                  <p className="text-white"><span className="text-red-400">Error:</span> {"{{error}}"}</p>
+                  <p className="text-mist">
+                    You are a senior SQL engineer. Given this query and its
+                    error message, explain the root cause in one sentence, then
+                    return a corrected query with nothing else changed.
+                  </p>
+                  <p className="mt-3 text-white">
+                    <span className="text-violet">Query:</span> {"{{query}}"}
+                  </p>
+                  <p className="text-white">
+                    <span className="text-red-400">Error:</span> {"{{error}}"}
+                  </p>
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-mist pt-2">
@@ -209,7 +232,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -222,11 +244,31 @@ export default function HomePage() {
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
             {[
-              { name: "ChatGPT (GPT-4o)", icon: "🤖", border: "hover:border-emerald-500/40" },
-              { name: "Claude 3.5 Sonnet", icon: "🧠", border: "hover:border-amber/40" },
-              { name: "Google Gemini 1.5", icon: "✨", border: "hover:border-violet/40" },
-              { name: "Midjourney v6", icon: "🎨", border: "hover:border-cyan-500/40" },
-              { name: "DeepSeek R1", icon: "⚡", border: "hover:border-pink-500/40" },
+              {
+                name: "ChatGPT (GPT-4o)",
+                icon: "🤖",
+                border: "hover:border-emerald-500/40",
+              },
+              {
+                name: "Claude 3.5 Sonnet",
+                icon: "🧠",
+                border: "hover:border-amber/40",
+              },
+              {
+                name: "Google Gemini 1.5",
+                icon: "✨",
+                border: "hover:border-violet/40",
+              },
+              {
+                name: "Midjourney v6",
+                icon: "🎨",
+                border: "hover:border-cyan-500/40",
+              },
+              {
+                name: "DeepSeek R1",
+                icon: "⚡",
+                border: "hover:border-pink-500/40",
+              },
             ].map((engine, i) => (
               <div
                 key={i}
@@ -240,37 +282,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. POPULAR CATEGORIES */}
+      {/* 3. POPULAR CATEGORIES (UPDATED WITH UNIQUE BG IMAGES) */}
       <section className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex items-end justify-between border-b border-white/10 pb-5">
           <div>
-            <span className="text-xs font-extrabold uppercase tracking-widest text-violet">DISCOVER</span>
-            <h2 className="mt-1 font-display text-2xl font-extrabold text-white md:text-3xl">Popular Prompt Categories</h2>
-            <p className="mt-1 text-xs text-mist">Curated AI prompt collections engineered for high accuracy</p>
+            <span className="text-xs font-extrabold uppercase tracking-widest text-violet">
+              DISCOVER
+            </span>
+            <h2 className="mt-1 font-display text-2xl font-extrabold text-white md:text-3xl">
+              Popular Prompt Categories
+            </h2>
+            <p className="mt-1 text-xs text-mist">
+              Curated AI prompt collections engineered for high accuracy
+            </p>
           </div>
-          <Link href="/categories" className="text-xs font-bold text-violet hover:underline">
+          <Link
+            href="/categories"
+            className="text-xs font-bold text-violet hover:underline"
+          >
             View All Categories →
           </Link>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { name: "Web Development", icon: "💻", count: "128 Prompts", desc: "React, Next.js, Architecture & APIs" },
-            { name: "UI/UX & Design", icon: "🎨", count: "84 Prompts", desc: "Midjourney, Figma, DALL-E 3" },
-            { name: "Content Copywriting", icon: "✍️", count: "95 Prompts", desc: "Sales Copies, Landing Pages & SEO" },
-            { name: "SQL & Databases", icon: "🗄️", count: "62 Prompts", desc: "Query Optimization & Debugging" },
+            {
+              name: "Web Development",
+              icon: "💻",
+              count: "128 Prompts",
+              desc: "React, Next.js, Architecture & APIs",
+              bgImage:
+                "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
+            },
+            {
+              name: "UI/UX & Design",
+              icon: "🎨",
+              count: "84 Prompts",
+              desc: "Midjourney, Figma, DALL-E 3",
+              bgImage:
+                "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=80",
+            },
+            {
+              name: "Content Copywriting",
+              icon: "✍️",
+              count: "95 Prompts",
+              desc: "Sales Copies, Landing Pages & SEO",
+              bgImage:
+                "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop&q=80",
+            },
+            {
+              name: "SQL & Databases",
+              icon: "🗄️",
+              count: "62 Prompts",
+              desc: "Query Optimization & Debugging",
+              bgImage:
+                "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&auto=format&fit=crop&q=80",
+            },
           ].map((cat, idx) => (
             <Link
               key={idx}
               href="/categories"
-              className="group relative flex flex-col justify-between rounded-3xl border border-white/10 bg-[#0d111a] p-6 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-violet/50 hover:shadow-violet/10"
+              className="group relative overflow-hidden flex flex-col justify-between rounded-3xl border border-white/10 bg-[#0d111a] p-6 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-violet/50 hover:shadow-violet/10 h-64"
             >
-              <div>
+              {/* Unique Background Image with Dark Gradient Overlay */}
+              <img
+                src={cat.bgImage}
+                alt={cat.name}
+                className="absolute inset-0 h-full w-full object-cover opacity-20 group-hover:opacity-35 group-hover:scale-110 transition-all duration-500 pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/80 to-[#0d111a]/40 pointer-events-none" />
+
+              <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-2xl shadow-inner group-hover:scale-110 transition-transform">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-2xl backdrop-blur-md shadow-inner group-hover:scale-110 transition-transform">
                     {cat.icon}
                   </div>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-mist group-hover:border-violet/30 group-hover:text-white transition-all">
+                  <span className="rounded-full border border-white/10 bg-white/10 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-mist group-hover:border-violet/30 group-hover:text-white transition-all">
                     {cat.count}
                   </span>
                 </div>
@@ -283,9 +370,11 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="mt-6 flex items-center justify-between border-t border-white/5 pt-4 text-xs font-semibold text-violet">
+              <div className="relative z-10 mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-semibold text-violet">
                 <span>Browse Category</span>
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                <span className="group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
               </div>
             </Link>
           ))}
@@ -339,9 +428,11 @@ export default function HomePage() {
                   className="h-full w-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/60 to-transparent" />
-                
+
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <span className={`rounded-full border px-3 py-0.5 text-[10px] font-bold backdrop-blur-md ${item.badgeColor}`}>
+                  <span
+                    className={`rounded-full border px-3 py-0.5 text-[10px] font-bold backdrop-blur-md ${item.badgeColor}`}
+                  >
                     {item.engine}
                   </span>
                   <div className="flex items-center gap-3">
@@ -349,12 +440,16 @@ export default function HomePage() {
                       type="button"
                       onClick={() => toggleBookmark(item.id)}
                       className={`text-sm ${
-                        bookmarks[item.id] ? "text-amber" : "text-mist hover:text-white"
+                        bookmarks[item.id]
+                          ? "text-amber"
+                          : "text-mist hover:text-white"
                       }`}
                     >
                       {bookmarks[item.id] ? "★" : "☆"}
                     </button>
-                    <span className="text-xs text-amber font-bold">★ {item.rating}</span>
+                    <span className="text-xs text-amber font-bold">
+                      ★ {item.rating}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -377,7 +472,9 @@ export default function HomePage() {
                       alt={item.author}
                       className="h-6 w-6 rounded-full object-cover border border-violet/30"
                     />
-                    <span className="text-xs text-mist font-medium">{item.author}</span>
+                    <span className="text-xs text-mist font-medium">
+                      {item.author}
+                    </span>
                   </div>
 
                   <button
@@ -404,9 +501,14 @@ export default function HomePage() {
             <h2 className="mt-2 font-display text-2xl font-black text-white md:text-3xl">
               Featured Prompt Creators
             </h2>
-            <p className="mt-1 text-xs text-mist">Top engineers and creators publishing production-grade AI prompts</p>
+            <p className="mt-1 text-xs text-mist">
+              Top engineers and creators publishing production-grade AI prompts
+            </p>
           </div>
-          <Link href="/dashboard/add-prompt" className="text-xs font-bold text-violet hover:underline shrink-0">
+          <Link
+            href="/dashboard/add-prompt"
+            className="text-xs font-bold text-violet hover:underline shrink-0"
+          >
             Become a Creator →
           </Link>
         </div>
@@ -421,8 +523,10 @@ export default function HomePage() {
               copies: "12.4k",
               rating: "4.95 ★",
               badge: "Top Creator",
-              avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
-              cover: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80",
+              avatar:
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80",
+              cover:
+                "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80",
             },
             {
               name: "Elena Rostova",
@@ -432,8 +536,10 @@ export default function HomePage() {
               copies: "9.8k",
               rating: "4.92 ★",
               badge: "Verified Engineer",
-              avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&auto=format&fit=crop&q=80",
-              cover: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600&auto=format&fit=crop&q=80",
+              avatar:
+                "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&auto=format&fit=crop&q=80",
+              cover:
+                "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600&auto=format&fit=crop&q=80",
             },
             {
               name: "Alex Rivers",
@@ -443,8 +549,10 @@ export default function HomePage() {
               copies: "18.2k",
               rating: "5.0 ★",
               badge: "Pro Marketer",
-              avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&auto=format&fit=crop&q=80",
-              cover: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80",
+              avatar:
+                "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&auto=format&fit=crop&q=80",
+              cover:
+                "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80",
             },
           ].map((creator, i) => (
             <div
@@ -474,7 +582,9 @@ export default function HomePage() {
                     <h3 className="font-display text-base font-extrabold text-white group-hover:text-violet transition-colors">
                       {creator.name}
                     </h3>
-                    <p className="text-[11px] font-medium text-mist">{creator.role}</p>
+                    <p className="text-[11px] font-medium text-mist">
+                      {creator.role}
+                    </p>
                   </div>
                 </div>
 
@@ -511,7 +621,10 @@ export default function HomePage() {
           <h2 className="mt-2 font-display text-2xl font-black text-white md:text-3xl">
             Prompt Engineering Essentials
           </h2>
-          <p className="mt-1 text-xs text-mist">Core principles to design high-accuracy AI prompts with predictable outputs</p>
+          <p className="mt-1 text-xs text-mist">
+            Core principles to design high-accuracy AI prompts with predictable
+            outputs
+          </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -520,19 +633,22 @@ export default function HomePage() {
               title: "System Role & Persona Framing",
               desc: "Assign a specific expert identity (e.g., 'Act as a Principal Security Auditor') to force the model to adopt domain-specific knowledge and vocabulary.",
               tag: "Core Foundation",
-              image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80",
+              image:
+                "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80",
             },
             {
               title: "Few-Shot Pattern Matching",
               desc: "Provide 2 to 3 input and output examples inside the prompt body. This eliminates formatting hallucinations and guarantees structured responses.",
               tag: "Accuracy Booster",
-              image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&auto=format&fit=crop&q=80",
+              image:
+                "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&auto=format&fit=crop&q=80",
             },
             {
               title: "Chain-of-Thought Reasoning",
               desc: "Instruct the model to 'Think step-by-step before answering'. This forces reasoning tokens to generate before final conclusions, solving complex math/logic tasks.",
               tag: "Advanced Logic",
-              image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
+              image:
+                "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
             },
           ].map((item, index) => (
             <div
@@ -579,9 +695,12 @@ export default function HomePage() {
             <span className="rounded-full bg-violet/20 border border-violet/30 px-3 py-1 text-[10px] font-bold text-violet uppercase">
               Quality Assured
             </span>
-            <h2 className="text-xl font-black text-white">100% Tested &amp; Verified Prompts</h2>
+            <h2 className="text-xl font-black text-white">
+              100% Tested &amp; Verified Prompts
+            </h2>
             <p className="text-xs text-mist max-w-xl">
-              Every prompt submitted to PromptWorld goes through automated syntax checking and community moderation.
+              Every prompt submitted to PromptWorld goes through automated syntax
+              checking and community moderation.
             </p>
           </div>
           <Link
@@ -596,35 +715,50 @@ export default function HomePage() {
       {/* 8. LOVED BY DEVELOPERS & ENGINEERS WITH AVATARS */}
       <section className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="border-b border-white/10 pb-4">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-amber">COMMUNITY TESTIMONIALS</span>
-          <h2 className="mt-1 font-display text-2xl font-bold text-white">Loved by Developers &amp; Engineers</h2>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-amber">
+            COMMUNITY TESTIMONIALS
+          </span>
+          <h2 className="mt-1 font-display text-2xl font-bold text-white">
+            Loved by Developers &amp; Engineers
+          </h2>
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
           {[
             {
-              quote: "The Next.js architecture prompt saved me hours of setup time. Highly recommended for full-stack devs!",
+              quote:
+                "The Next.js architecture prompt saved me hours of setup time. Highly recommended for full-stack devs!",
               name: "Fahim Ahmmed",
               title: "Senior Full-Stack Engineer",
-              avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+              avatar:
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
             },
             {
-              quote: "SQL debugging prompt is spot on. Corrected complex JOIN queries without wasting OpenAI tokens.",
+              quote:
+                "SQL debugging prompt is spot on. Corrected complex JOIN queries without wasting OpenAI tokens.",
               name: "SM Rafid",
               title: "Data Engineer & LLM Specialist",
-              avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
+              avatar:
+                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
             },
             {
-              quote: "The UI design prompts for Midjourney v6 give photorealistic results on the very first attempt.",
+              quote:
+                "The UI design prompts for Midjourney v6 give photorealistic results on the very first attempt.",
               name: "Rakibul Islam",
               title: "UI/UX Product Designer",
-              avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80",
+              avatar:
+                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80",
             },
           ].map((review, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 bg-[#0d111a] p-6 shadow-xl hover:border-violet/30 transition-all flex flex-col justify-between">
+            <div
+              key={i}
+              className="rounded-2xl border border-white/10 bg-[#0d111a] p-6 shadow-xl hover:border-violet/30 transition-all flex flex-col justify-between"
+            >
               <div>
                 <div className="text-amber text-xs font-bold">★★★★★</div>
-                <p className="mt-3 text-xs leading-relaxed text-mist">"{review.quote}"</p>
+                <p className="mt-3 text-xs leading-relaxed text-mist">
+                  "{review.quote}"
+                </p>
               </div>
               <div className="mt-6 border-t border-white/5 pt-4 flex items-center gap-3">
                 <img
@@ -633,7 +767,9 @@ export default function HomePage() {
                   className="h-10 w-10 rounded-full object-cover border border-violet/40 shadow-md"
                 />
                 <div>
-                  <h4 className="font-display text-xs font-bold text-white">{review.name}</h4>
+                  <h4 className="font-display text-xs font-bold text-white">
+                    {review.name}
+                  </h4>
                   <p className="text-[10px] text-mist">{review.title}</p>
                 </div>
               </div>
@@ -645,8 +781,12 @@ export default function HomePage() {
       {/* 9. FAQ ACCORDION SECTION */}
       <section className="mx-auto max-w-4xl px-4 md:px-6">
         <div className="text-center">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-violet">GOT QUESTIONS?</span>
-          <h2 className="mt-2 font-display text-2xl font-bold text-white">Frequently Asked Questions</h2>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-violet">
+            GOT QUESTIONS?
+          </span>
+          <h2 className="mt-2 font-display text-2xl font-bold text-white">
+            Frequently Asked Questions
+          </h2>
         </div>
 
         <div className="mt-8 flex flex-col gap-3">
@@ -661,7 +801,9 @@ export default function HomePage() {
                 className="flex w-full items-center justify-between p-5 text-left text-xs font-bold text-white"
               >
                 <span>{faq.q}</span>
-                <span className="text-mist">{openFaq === index ? "−" : "+"}</span>
+                <span className="text-mist">
+                  {openFaq === index ? "−" : "+"}
+                </span>
               </button>
               {openFaq === index && (
                 <div className="px-5 pb-5 text-xs leading-relaxed text-mist border-t border-white/5 pt-3">
@@ -672,7 +814,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
     </div>
   );
 }

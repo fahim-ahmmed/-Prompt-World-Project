@@ -8,12 +8,9 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const myImageLink =
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80";
-
-  // ১. প্রাথমিক অবস্থায় সম্পূর্ণ Logged Out থাকবে
   const [user, setUser] = useState(null);
   const [mounted, setMounted] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   const checkAuth = () => {
     if (typeof window === "undefined") return;
@@ -24,10 +21,7 @@ export default function Navbar() {
     if (token && storedUser && storedUser !== "undefined") {
       try {
         const parsed = JSON.parse(storedUser);
-        setUser({
-          ...parsed,
-          photoURL: parsed.photoURL || myImageLink,
-        });
+        setUser(parsed);
       } catch (err) {
         setUser(null);
       }
@@ -40,7 +34,11 @@ export default function Navbar() {
     setMounted(true);
     checkAuth();
 
-    const handleAuthChange = () => checkAuth();
+    const handleAuthChange = () => {
+      setImgError(false);
+      checkAuth();
+    };
+
     window.addEventListener("authChange", handleAuthChange);
     window.addEventListener("storage", handleAuthChange);
 
@@ -117,11 +115,18 @@ export default function Navbar() {
           ) : user ? (
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-white/5 px-3.5 py-1.5 backdrop-blur-md shadow-inner">
-                <img
-                  src={user.photoURL || myImageLink}
-                  alt={user.name || "User"}
-                  className="h-8 w-8 rounded-xl object-cover border border-violet/50 shadow-md"
-                />
+                {user.photoURL && !imgError ? (
+                  <img
+                    src={user.photoURL}
+                    alt={user.name || "User"}
+                    onError={() => setImgError(true)}
+                    className="h-8 w-8 rounded-xl object-cover border border-violet/50 shadow-md"
+                  />
+                ) : (
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-violet to-purple-600 font-bold text-white text-xs border border-violet/50 shadow-md">
+                    {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                  </div>
+                )}
                 <span className="text-sm font-bold text-white max-w-[130px] truncate">
                   {user.name || "User"}
                 </span>
